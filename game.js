@@ -1,4 +1,3 @@
-
 window.onload = (event) => {
       let clearbtn = document.getElementById("clear")
       let SearchEvent = document.getElementById("Search")
@@ -10,20 +9,26 @@ window.onload = (event) => {
       let obj = {}
       submit.addEventListener("click", (e) => {
             e.preventDefault()
-            let t = title.value
-            let d = desc.value
-            localStorage.setItem(JSON.stringify(t), JSON.stringify(d))
-            obj[t] = d;
-            ihtml = ""
-            let i = 0;
-            for (let a in obj) {
-                  if (t == "" || d=="") {
-                        alert("Please Enter the Title and Description Both !!!")
-                  }
-                  else {
+            if (title.value != "" && desc.value != "") {
+                  var t = title.value
+                  var d = desc.value
+                  fun()
+            }
+            else {
+                  alert("Please Enter the Title and Description Both !!!")
+            }
 
-
-                        ihtml += `
+            function fun(){
+                  localStorage.setItem(JSON.stringify(t), JSON.stringify(d))
+                  obj[t] = d;
+                  ihtml = ""
+                  let i = 0;
+                  for (let a in obj) {
+                        if (t == "" || d == "") {
+                              alert("Please Enter the Title and Description Both !!!")
+                        }
+                        else {
+                              ihtml += `
                   <div class="column" id="card${i++}" >
                                <input type="checkbox">
                                <h5 id="title-todo" class="card-title">${a}</h5>
@@ -31,9 +36,11 @@ window.onload = (event) => {
                         
                    </div>
                   `
+                        }
                   }
+                  rowcard.innerHTML = ihtml;
             }
-            rowcard.innerHTML = ihtml;
+
       })
 
 
@@ -46,6 +53,8 @@ window.onload = (event) => {
 
 
 }
+
+
 
 
 
