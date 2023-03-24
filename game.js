@@ -1,55 +1,52 @@
 
-window.onload=(event)=>{
-      let a=document.getElementById("title-todo")
-      let b=document.getElementById("desc-todo")
-      let deletebtn=document.getElementById("delete-btn")
-      let clearbtn=document.getElementById("clear")
-      let columnbox=document.getElementById("card1")
-     
-           submit.addEventListener("click",(e)=>{
-                  e.preventDefault()
-                  let t=title.value
-                  let d=desc.value
-                  localStorage.setItem(JSON.stringify(t),JSON.stringify(d))
-                  if(t=="" & d=="")
-                  {
-                        a.innerHTML="-"
-                        b.innerHTML="-"
+window.onload = (event) => {
+      let clearbtn = document.getElementById("clear")
+      let SearchEvent = document.getElementById("Search")
+      let rowcard = document.getElementById("roww")
+
+      SearchEvent.addEventListener("click", (e) => {
+            e.preventDefault()
+      })
+      let obj = {}
+      submit.addEventListener("click", (e) => {
+            e.preventDefault()
+            let t = title.value
+            let d = desc.value
+            localStorage.setItem(JSON.stringify(t), JSON.stringify(d))
+            obj[t] = d;
+            ihtml = ""
+            let i = 0;
+            for (let a in obj) {
+                  if (t == "" || d=="") {
+                        alert("Please Enter the Title and Description Both !!!")
                   }
-                  else if(d=="")
-                  {
-                        a.innerHTML=t
-                        b.innerHTML="-"
+                  else {
 
+
+                        ihtml += `
+                  <div class="column" id="card${i++}" >
+                               <input type="checkbox">
+                               <h5 id="title-todo" class="card-title">${a}</h5>
+                               <p id="desc-todo" class="card-text">${obj[a]}</p>
+                        
+                   </div>
+                  `
                   }
-                  else if(t=="")
-                  {
-                        a.innerHTML="-"
-                        b.innerHTML=d
-                  }
-                  else
-                  {
-                        a.innerHTML=t
-                        b.innerHTML=d 
-                  }
-            columnbox.style.display="block";
-                
-            })
-            
-            deletebtn.addEventListener("click",(e)=>{
-                  e.preventDefault()
-                columnbox.style.display="none";
-
-            })
-
-            clearbtn.addEventListener("click",(e)=>{
-                  e.preventDefault()
-                  desc.value=""
-                  title.value=""
-            })
+            }
+            rowcard.innerHTML = ihtml;
+      })
 
 
-     }
+
+      clearbtn.addEventListener("click", (e) => {
+            e.preventDefault()
+            desc.value = ""
+            title.value = ""
+      })
+
+
+}
+
 
 
 
